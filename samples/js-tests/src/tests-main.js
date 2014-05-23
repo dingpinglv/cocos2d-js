@@ -102,7 +102,6 @@ var TestController = cc.LayerGradient.extend({
         if( autoTestEnabled )
             toggleAutoTestItem.setSelectedIndex(1);
 
-
         var menu = cc.Menu.create(closeItem, toggleAutoTestItem);//pmenu is just a holder for the close button
         menu.x = 0;
 	    menu.y = 0;
