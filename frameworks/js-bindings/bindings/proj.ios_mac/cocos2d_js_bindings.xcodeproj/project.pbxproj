@@ -631,7 +631,7 @@
 		1551A336158F2AB200E66CFE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "";
 			};
 			buildConfigurationList = 1551A339158F2AB200E66CFE /* Build configuration list for PBXProject "cocos2d_js_bindings" */;
@@ -739,7 +739,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -778,7 +777,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -824,7 +822,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../../external/spidermonkey/prebuilt/mac",
 				);
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../external/spidermonkey/include/mac $(SRCROOT)/../../cocos2d-x/cocos/2d/platform/mac $(SRCROOT)/../../cocos2d-x/external/glfw3/include/mac";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../external/spidermonkey/include/mac $(SRCROOT)/../../cocos2d-x/cocos/platform/mac $(SRCROOT)/../../cocos2d-x/external/glfw3/include/mac";
 			};
 			name = Debug;
 		};
@@ -843,7 +841,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../../external/spidermonkey/prebuilt/mac",
 				);
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../external/spidermonkey/include/mac $(SRCROOT)/../../cocos2d-x/cocos/2d/platform/mac $(SRCROOT)/../../cocos2d-x/external/glfw3/include/mac";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../external/spidermonkey/include/mac $(SRCROOT)/../../cocos2d-x/cocos/platform/mac $(SRCROOT)/../../cocos2d-x/external/glfw3/include/mac";
 			};
 			name = Release;
 		};
@@ -851,7 +849,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					COCOS2D_JAVASCRIPT,
@@ -866,7 +863,7 @@
 				"OTHER_LDFLAGS[arch=arm64]" = "-ljs_static.arm64";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../external/spidermonkey/include/ios $(SRCROOT)/../../cocos2d-x/cocos/2d/platform/ios $(SRCROOT)/../../cocos2d-x/plugin/protocols/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../external/spidermonkey/include/ios $(SRCROOT)/../../cocos2d-x/cocos/platform/ios $(SRCROOT)/../../cocos2d-x/plugin/protocols/include";
 			};
 			name = Debug;
 		};
@@ -874,7 +871,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					COCOS2D_JAVASCRIPT,
@@ -889,7 +885,7 @@
 				"OTHER_LDFLAGS[arch=arm64]" = "-ljs_static.arm64";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../external/spidermonkey/include/ios $(SRCROOT)/../../cocos2d-x/cocos/2d/platform/ios $(SRCROOT)/../../cocos2d-x/plugin/protocols/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../external/spidermonkey/include/ios $(SRCROOT)/../../cocos2d-x/cocos/platform/ios $(SRCROOT)/../../cocos2d-x/plugin/protocols/include";
 			};
 			name = Release;
 		};

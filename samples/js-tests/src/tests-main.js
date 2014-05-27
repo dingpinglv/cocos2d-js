@@ -53,7 +53,9 @@ var TestScene = cc.Scene.extend({
         menuItem.x = winSize.width - 50;
         menuItem.y = 25;
 
-        this.addChild(menu, 1);
+        if(!window.sidebar){
+            this.addChild(menu, 1);
+        }
     },
     onMainMenuCallback:function () {
         var scene = cc.Scene.create();
@@ -184,7 +186,7 @@ var TestController = cc.LayerGradient.extend({
         }, this);
     },
     onCloseCallback:function () {
-        history.go(-1);
+        history && history.go(-1);
     },
     onToggleAutoTest:function() {
         autoTestEnabled = !autoTestEnabled;

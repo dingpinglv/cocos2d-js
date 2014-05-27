@@ -21,6 +21,8 @@
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '10.0'">v100</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v110_xp</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -28,6 +30,8 @@
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '10.0'">v100</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v110_xp</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -79,7 +83,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)cocos\storage;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(ProjectDir)..\Classes;$(ProjectDir)..\..\..\..\frameworks\js-bindings\external\spidermonkey\include\win32;$(ProjectDir)..\..\..\..\frameworks\js-bindings\bindings\auto;$(ProjectDir)..\..\..\..\frameworks\js-bindings\bindings\manual;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)cocos\base;$(EngineRoot)cocos\storage;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(ProjectDir)..\Classes;$(ProjectDir)..\..\..\..\frameworks\js-bindings\external\spidermonkey\include\win32;$(ProjectDir)..\..\..\..\frameworks\js-bindings\bindings\auto;$(ProjectDir)..\..\..\..\frameworks\js-bindings\bindings\manual;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_DEBUG;DEBUG;XP_WIN;JS_HAVE___INTN;JS_INTPTR_TYPE=int;COCOS2D_DEBUG=1;COCOS2D_JAVASCRIPT=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -136,7 +140,7 @@ copy "$(ProjectDir)..\..\project.json" "$(OutDir)\js-moonwarriors-res"</Command>
       <ProxyFileName>js-moonwarriors_p.c</ProxyFileName>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)cocos\storage;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(ProjectDir)..\Classes;$(ProjectDir)..\..\..\..\frameworks\js-bindings\external\spidermonkey\include\win32;$(ProjectDir)..\..\..\..\frameworks\js-bindings\bindings\auto;$(ProjectDir)..\..\..\..\frameworks\js-bindings\bindings\manual;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)cocos\base;$(EngineRoot)cocos\storage;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(ProjectDir)..\Classes;$(ProjectDir)..\..\..\..\frameworks\js-bindings\external\spidermonkey\include\win32;$(ProjectDir)..\..\..\..\frameworks\js-bindings\bindings\auto;$(ProjectDir)..\..\..\..\frameworks\js-bindings\bindings\manual;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;NDEBUG;XP_WIN;JS_HAVE___INTN;JS_INTPTR_TYPE=int;COCOS2D_JAVASCRIPT=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>
       </ExceptionHandling>

@@ -1402,12 +1402,10 @@ var ActionRotateToRepeat = ActionsDemo.extend({
         var act1 = cc.RotateTo.create(0.5, 90);
         var act2 = cc.RotateTo.create(0.5, 0);
         var seq = cc.Sequence.create(act1, act2);
+        var seq2 = seq.clone();
 
-        var rep1 = seq.repeatForever();
-        var rep2 = seq.clone().repeat(4);
-
-        this._tamara.runAction(rep1);
-        this._kathia.runAction(rep2);
+        this._tamara.runAction(seq.repeatForever());
+        this._kathia.runAction(seq2.repeat(4));
         //----end23----
 
     },
@@ -2033,7 +2031,7 @@ var ActionTargeted = ActionsDemo.extend({
 
         var seq = cc.Sequence.create(jump1, t1, rot1, t2);
 
-        var always = seq.repeat();
+        var always = seq.repeatForever();
 
         this._tamara.runAction(always);
         //----end31----
@@ -2164,7 +2162,7 @@ var ActionStackableJump = ActionsDemo.extend({
         var seq = cc.Sequence.create(action, back);
         var repeat = seq.repeatForever();
         this._grossini.runAction(repeat);
-        //--end34----
+        //----end34----
 
     },
     title:function () {
@@ -2705,7 +2703,9 @@ var nextActionsTest = function () {
     actionsTestIdx++;
     actionsTestIdx = actionsTestIdx % arrayOfActionsTest.length;
 
-    window.sidebar && window.sidebar.changeTest(actionsTestIdx, 1);
+    if(window.sidebar){
+        actionsTestIdx = window.sidebar.changeTest(actionsTestIdx, 1);
+    }
 
     return new arrayOfActionsTest[actionsTestIdx]();
 };
@@ -2714,7 +2714,9 @@ var previousActionsTest = function () {
     if (actionsTestIdx < 0)
         actionsTestIdx += arrayOfActionsTest.length;
 
-    window.sidebar && window.sidebar.changeTest(actionsTestIdx, 1);
+    if(window.sidebar){
+        actionsTestIdx = window.sidebar.changeTest(actionsTestIdx, 1);
+    }
 
     return new arrayOfActionsTest[actionsTestIdx]();
 };

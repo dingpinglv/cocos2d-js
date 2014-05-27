@@ -413,13 +413,13 @@ bool
 /**
  * @method getTouchLocation
  * @param {cc.Touch} arg0
- * @return {vector2_object}
+ * @return {cc.Vec2}
  */
 getTouchLocation : function (
 touch 
 )
 {
-    return new Array();
+    return cc.Vec2;
 },
 
 /**
@@ -534,22 +534,22 @@ state
 
 /**
  * @method setLabelAnchorPoint
- * @param {vector2_object} arg0
+ * @param {cc.Vec2} arg0
  */
 setLabelAnchorPoint : function (
-array 
+vec2 
 )
 {
 },
 
 /**
  * @method getLabelAnchorPoint
- * @return {vector2_object}
+ * @return {cc.Vec2}
  */
 getLabelAnchorPoint : function (
 )
 {
-    return new Array();
+    return cc.Vec2;
 },
 
 /**
@@ -965,12 +965,12 @@ bool
 /**
  * @method initWithTargetAndPos
  * @param {cc.Node} arg0
- * @param {vector2_object} arg1
+ * @param {cc.Vec2} arg1
  * @return {bool}
  */
 initWithTargetAndPos : function (
 node, 
-array 
+vec2 
 )
 {
     return false;
@@ -988,12 +988,12 @@ float
 
 /**
  * @method getStartPos
- * @return {vector2_object}
+ * @return {cc.Vec2}
  */
 getStartPos : function (
 )
 {
-    return new Array();
+    return cc.Vec2;
 },
 
 /**
@@ -1069,12 +1069,12 @@ sprite
 /**
  * @method create
  * @param {cc.Node} arg0
- * @param {vector2_object} arg1
+ * @param {cc.Vec2} arg1
  * @return {cc.ControlHuePicker}
  */
 create : function (
 node, 
-array 
+vec2 
 )
 {
     return cc.ControlHuePicker;
@@ -1109,12 +1109,12 @@ getShadow : function (
 /**
  * @method initWithTargetAndPos
  * @param {cc.Node} arg0
- * @param {vector2_object} arg1
+ * @param {cc.Vec2} arg1
  * @return {bool}
  */
 initWithTargetAndPos : function (
 node, 
-array 
+vec2 
 )
 {
     return false;
@@ -1122,12 +1122,12 @@ array
 
 /**
  * @method getStartPos
- * @return {vector2_object}
+ * @return {cc.Vec2}
  */
 getStartPos : function (
 )
 {
-    return new Array();
+    return cc.Vec2;
 },
 
 /**
@@ -1193,12 +1193,12 @@ getBrightness : function (
 /**
  * @method create
  * @param {cc.Node} arg0
- * @param {vector2_object} arg1
+ * @param {cc.Vec2} arg1
  * @return {cc.ControlSaturationBrightnessPicker}
  */
 create : function (
 node, 
-array 
+vec2 
 )
 {
     return cc.ControlSaturationBrightnessPicker;
@@ -1352,10 +1352,10 @@ cc.ControlPotentiometer = {
 
 /**
  * @method setPreviousLocation
- * @param {vector2_object} arg0
+ * @param {cc.Vec2} arg0
  */
 setPreviousLocation : function (
-array 
+vec2 
 )
 {
 },
@@ -1392,17 +1392,17 @@ getMaximumValue : function (
 
 /**
  * @method angleInDegreesBetweenLineFromPoint_toPoint_toLineFromPoint_toPoint
- * @param {vector2_object} arg0
- * @param {vector2_object} arg1
- * @param {vector2_object} arg2
- * @param {vector2_object} arg3
+ * @param {cc.Vec2} arg0
+ * @param {cc.Vec2} arg1
+ * @param {cc.Vec2} arg2
+ * @param {cc.Vec2} arg3
  * @return {float}
  */
 angleInDegreesBetweenLineFromPoint_toPoint_toLineFromPoint_toPoint : function (
-array, 
-array, 
-array, 
-array 
+vec2, 
+vec2, 
+vec2, 
+vec2 
 )
 {
     return 0;
@@ -1410,10 +1410,10 @@ array
 
 /**
  * @method potentiometerBegan
- * @param {vector2_object} arg0
+ * @param {cc.Vec2} arg0
  */
 potentiometerBegan : function (
-array 
+vec2 
 )
 {
 },
@@ -1460,23 +1460,23 @@ getValue : function (
 
 /**
  * @method getPreviousLocation
- * @return {vector2_object}
+ * @return {cc.Vec2}
  */
 getPreviousLocation : function (
 )
 {
-    return new Array();
+    return cc.Vec2;
 },
 
 /**
  * @method distanceBetweenPointAndPoint
- * @param {vector2_object} arg0
- * @param {vector2_object} arg1
+ * @param {cc.Vec2} arg0
+ * @param {cc.Vec2} arg1
  * @return {float}
  */
 distanceBetweenPointAndPoint : function (
-array, 
-array 
+vec2, 
+vec2 
 )
 {
     return 0;
@@ -1484,10 +1484,10 @@ array
 
 /**
  * @method potentiometerEnded
- * @param {vector2_object} arg0
+ * @param {cc.Vec2} arg0
  */
 potentiometerEnded : function (
-array 
+vec2 
 )
 {
 },
@@ -1540,10 +1540,10 @@ sprite
 
 /**
  * @method potentiometerMoved
- * @param {vector2_object} arg0
+ * @param {cc.Vec2} arg0
  */
 potentiometerMoved : function (
-array 
+vec2 
 )
 {
 },
@@ -1593,13 +1593,13 @@ getSelectedThumbSprite : function (
 /**
  * @method locationFromTouch
  * @param {cc.Touch} arg0
- * @return {vector2_object}
+ * @return {cc.Vec2}
  */
 locationFromTouch : function (
 touch 
 )
 {
-    return new Array();
+    return cc.Vec2;
 },
 
 /**
@@ -1906,10 +1906,10 @@ getMinusSprite : function (
 
 /**
  * @method updateLayoutUsingTouchLocation
- * @param {vector2_object} arg0
+ * @param {cc.Vec2} arg0
  */
 updateLayoutUsingTouchLocation : function (
-array 
+vec2 
 )
 {
 },
@@ -2163,13 +2163,13 @@ hasMoved : function (
 /**
  * @method locationFromTouch
  * @param {cc.Touch} arg0
- * @return {vector2_object}
+ * @return {cc.Vec2}
  */
 locationFromTouch : function (
 touch 
 )
 {
-    return new Array();
+    return cc.Vec2;
 },
 
 /**
@@ -2232,11 +2232,11 @@ node
 
 /**
  * @method setContentOffsetInDuration
- * @param {vector2_object} arg0
+ * @param {cc.Vec2} arg0
  * @param {float} arg1
  */
 setContentOffsetInDuration : function (
-array, 
+vec2, 
 float 
 )
 {
@@ -2360,11 +2360,11 @@ init : function (
 
 /**
  * @method setContentOffset
- * @param {vector2_object} arg0
+ * @param {cc.Vec2} arg0
  * @param {bool} arg1
  */
 setContentOffset : function (
-array, 
+vec2, 
 bool 
 )
 {
@@ -2412,12 +2412,12 @@ bool
 
 /**
  * @method getContentOffset
- * @return {vector2_object}
+ * @return {cc.Vec2}
  */
 getContentOffset : function (
 )
 {
-    return new Array();
+    return cc.Vec2;
 },
 
 /**
@@ -2462,12 +2462,12 @@ getViewSize : function (
 
 /**
  * @method maxContainerOffset
- * @return {vector2_object}
+ * @return {cc.Vec2}
  */
 maxContainerOffset : function (
 )
 {
-    return new Array();
+    return cc.Vec2;
 },
 
 /**
@@ -2494,12 +2494,12 @@ node
 
 /**
  * @method minContainerOffset
- * @return {vector2_object}
+ * @return {cc.Vec2}
  */
 minContainerOffset : function (
 )
 {
-    return new Array();
+    return cc.Vec2;
 },
 
 /**
@@ -2954,96 +2954,117 @@ EditBox : function (
 };
 
 /**
- * @class AssetsManager
+ * @class EventAssetsManager
  */
-cc.AssetsManager = {
+cc.EventAssetsManager = {
 
 /**
- * @method setStoragePath
- * @param {char} arg0
+ * @method getAssetId
+ * @return {String}
  */
-setStoragePath : function (
-char 
+getAssetId : function (
 )
 {
+    return ;
 },
 
 /**
- * @method setPackageUrl
- * @param {char} arg0
+ * @method getMessage
+ * @return {String}
  */
-setPackageUrl : function (
-char 
+getMessage : function (
 )
 {
+    return ;
 },
 
 /**
- * @method checkUpdate
+ * @method getAssetsManager
+ * @return {cc.AssetsManager}
+ */
+getAssetsManager : function (
+)
+{
+    return cc.AssetsManager;
+},
+
+/**
+ * @method getPercent
+ * @return {float}
+ */
+getPercent : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getEventCode
+ * @return {cc.EventAssetsManager::EventCode}
+ */
+getEventCode : function (
+)
+{
+    return 0;
+},
+
+};
+
+/**
+ * @class Manifest
+ */
+cc.Manifest = {
+
+/**
+ * @method getAsset
+ * @param {String} arg0
+ * @return {cc.Manifest::Asset}
+ */
+getAsset : function (
+str 
+)
+{
+    return cc.Manifest::Asset;
+},
+
+/**
+ * @method getManifestFileUrl
+ * @return {String}
+ */
+getManifestFileUrl : function (
+)
+{
+    return ;
+},
+
+/**
+ * @method isVersionLoaded
  * @return {bool}
  */
-checkUpdate : function (
+isVersionLoaded : function (
 )
 {
     return false;
 },
 
 /**
- * @method getStoragePath
- * @return {char}
+ * @method isLoaded
+ * @return {bool}
  */
-getStoragePath : function (
+isLoaded : function (
 )
 {
-    return 0;
-},
-
-/**
- * @method update
- */
-update : function (
-)
-{
-},
-
-/**
- * @method setConnectionTimeout
- * @param {unsigned int} arg0
- */
-setConnectionTimeout : function (
-int 
-)
-{
-},
-
-/**
- * @method setVersionFileUrl
- * @param {char} arg0
- */
-setVersionFileUrl : function (
-char 
-)
-{
+    return false;
 },
 
 /**
  * @method getPackageUrl
- * @return {char}
+ * @return {String}
  */
 getPackageUrl : function (
 )
 {
-    return 0;
-},
-
-/**
- * @method getConnectionTimeout
- * @return {unsigned int}
- */
-getConnectionTimeout : function (
-)
-{
-    return 0;
+    return ;
 },
 
 /**
@@ -3058,42 +3079,146 @@ getVersion : function (
 
 /**
  * @method getVersionFileUrl
- * @return {char}
+ * @return {String}
  */
 getVersionFileUrl : function (
+)
+{
+    return ;
+},
+
+};
+
+/**
+ * @class AssetsManager
+ */
+cc.AssetsManager = {
+
+/**
+ * @method getState
+ * @return {cc.AssetsManager::State}
+ */
+getState : function (
 )
 {
     return 0;
 },
 
 /**
- * @method deleteVersion
+ * @method checkUpdate
  */
-deleteVersion : function (
+checkUpdate : function (
 )
 {
 },
 
 /**
+ * @method getStoragePath
+ * @return {String}
+ */
+getStoragePath : function (
+)
+{
+    return ;
+},
+
+/**
+ * @method update
+ */
+update : function (
+)
+{
+},
+
+/**
+ * @method getLocalManifest
+ * @return {cc.Manifest}
+ */
+getLocalManifest : function (
+)
+{
+    return cc.Manifest;
+},
+
+/**
+ * @method getRemoteManifest
+ * @return {cc.Manifest}
+ */
+getRemoteManifest : function (
+)
+{
+    return cc.Manifest;
+},
+
+/**
  * @method create
- * @param {char} arg0
- * @param {char} arg1
- * @param {char} arg2
- * @param {function} arg3
- * @param {function} arg4
- * @param {function} arg5
+ * @param {String} arg0
+ * @param {String} arg1
  * @return {cc.AssetsManager}
  */
 create : function (
-char, 
-char, 
-char, 
-func, 
-func, 
-func 
+str, 
+str 
 )
 {
     return cc.AssetsManager;
+},
+
+/**
+ * @method AssetsManager
+ * @constructor
+ * @param {String} arg0
+ * @param {String} arg1
+ */
+AssetsManager : function (
+str, 
+str 
+)
+{
+},
+
+};
+
+/**
+ * @class EventListenerAssetsManager
+ */
+cc.EventListenerAssetsManager = {
+
+/**
+ * @method init
+ * @param {cc.AssetsManager} arg0
+ * @param {function} arg1
+ * @return {bool}
+ */
+init : function (
+assetsmanager, 
+func 
+)
+{
+    return false;
+},
+
+/**
+ * @method create
+ * @param {cc.AssetsManager} arg0
+ * @param {function} arg1
+ * @return {cc.EventListenerAssetsManager}
+ */
+create : function (
+assetsmanager, 
+func 
+)
+{
+    return cc.EventListenerAssetsManager;
+},
+
+/**
+ * @method EventListenerAssetsManager
+ * @constructor
+ */
+EventListenerAssetsManager : function (
+)
+{
 },
 
 };

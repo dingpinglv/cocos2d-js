@@ -2608,6 +2608,7 @@ bool js_cocos2dx_ActionInterval_easing(JSContext *cx, uint32_t argc, jsval *vp)
     JS::RootedValue jsParam(cx);
     double tag;
     double parameter;
+
     for (int i = 0; i < argc; i++)
     {
         jsval vpi = argv[i];
@@ -2650,17 +2651,17 @@ bool js_cocos2dx_ActionInterval_easing(JSContext *cx, uint32_t argc, jsval *vp)
             action = cocos2d::EaseSineInOut::create(currentAction);
         else if (tag == EASE_ELASTIC_IN)
         {
-            if (!hasParam) ok = false;
+            if (!hasParam) parameter = 0.3;
             action = cocos2d::EaseElasticIn::create(currentAction, parameter);
         }
         else if (tag == EASE_ELASTIC_OUT)
         {
-            if (!hasParam) ok = false;
+            if (!hasParam) parameter = 0.3;
             action = cocos2d::EaseElasticOut::create(currentAction, parameter);
         }
         else if (tag == EASE_ELASTIC_INOUT)
         {
-            if (!hasParam) ok = false;
+            if (!hasParam) parameter = 0.3;
             action = cocos2d::EaseElasticInOut::create(currentAction, parameter);
         }
         else if (tag == EASE_BOUNCE_IN)
@@ -3257,7 +3258,7 @@ bool js_cocos2dx_ccpNormalize(JSContext *cx, uint32_t argc, jsval *vp)
 	jsval *argv = JS_ARGV(cx, vp);
     bool ok = true;
 	if (argc == 1) {
-		cocos2d::Vector2 ret;
+		cocos2d::Vec2 ret;
 		ok &= jsval_to_vector2(cx, argv[0], &ret);
         JSB_PRECONDITION2(ok, cx, false, "Error processing arguments");
         
