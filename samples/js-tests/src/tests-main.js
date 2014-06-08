@@ -104,7 +104,6 @@ var TestController = cc.LayerGradient.extend({
         if( autoTestEnabled )
             toggleAutoTestItem.setSelectedIndex(1);
 
-
         var menu = cc.Menu.create(closeItem, toggleAutoTestItem);//pmenu is just a holder for the close button
         menu.x = 0;
 	    menu.y = 0;
@@ -206,6 +205,21 @@ var TestController = cc.LayerGradient.extend({
 });
 TestController.YOffset = 0;
 var testNames = [
+    {
+        title:"RenderTexture Test",
+        platforms: PLATFORM_ALL,
+        testScene:function () {
+            return new RenderTextureTestScene();
+        }
+    },
+    {
+        title:"Transitions Test",
+        resource:g_transitions,
+        platforms: PLATFORM_ALL,
+        testScene:function () {
+            return new TransitionsTestScene();
+        }
+    },
     {
         title:"ActionManager Test",
         platforms: PLATFORM_ALL,

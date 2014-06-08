@@ -2,7 +2,7 @@
 <project name="Javascript compress project" basedir="." default="compile_test_advanced">
 
     <taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
-             classpath="${basedir}/../../../tools/compiler/compiler.jar"/>
+             classpath="${basedir}/../../frameworks/cocos2d-html5/tools/compiler/compiler.jar"/>
 
 
     <target name="compile_test_advanced">
@@ -10,9 +10,6 @@
                 debug="false" output="MoonWarriors-compress.js">
                 <!--sourceMapOutputFile="sourcemap"
                 sourceMapFormat="V3">-->
-            <externs dir="${basedir}/../../../cocos2d">
-                <file name="core/cocos2d_externs.js"/>
-            </externs>
             <sources dir="${basedir}/../../../cocos2d">
                 <file name="core/platform/CCClass.js"/>
                 <file name="core/cocoa/CCGeometry.js"/>
@@ -26,6 +23,7 @@
                 <file name="core/platform/CCEGLView.js"/>
                 <file name="core/platform/CCScreen.js"/>
                 <file name="core/platform/CCVisibleRect.js"/>
+                <file name="core/renderer/RendererCanvas.js"/>
                 <file name="core/cocoa/CCNS.js"/>
                 <file name="core/cocoa/CCAffineTransform.js"/>
                 <file name="core/support/CCPointExtension.js"/>

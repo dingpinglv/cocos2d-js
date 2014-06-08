@@ -9,12 +9,14 @@ var Bullet = cc.Sprite.extend({
     zOrder:3000,
     attackMode:MW.ENEMY_MOVE_TYPE.NORMAL,
     parentType:MW.BULLET_TYPE.PLAYER,
+    _collideRect:null,
     ctor:function (bulletSpeed, weaponType, attackMode) {
         this._super("#"+weaponType);
 
         this.yVelocity = -bulletSpeed;
         this.attackMode = attackMode;
         this.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
+        this._collideRect = cc.rect(-3, -3, 6, 6);
     },
     update:function (dt) {
         var x = this.x, y = this.y;
@@ -25,7 +27,7 @@ var Bullet = cc.Sprite.extend({
         }
     },
     destroy:function () {
-        var explode = HitEffect.getOrCreateHitEffect(this.x, this.y, Math.random() * 360, 0.75);
+        HitEffect.getOrCreateHitEffect(this.x, this.y, Math.random() * 360, 0.75);
         this.active = false;
         this.visible = false;
     },
@@ -33,16 +35,20 @@ var Bullet = cc.Sprite.extend({
         this.HP--;
     },
     collideRect:function (x, y) {
-        return cc.rect(x - 3, y - 3, 6, 6);
+        var locRect = this._collideRect;
+        locRect.x = x - 3;
+        locRect.y = y - 3;
+        return locRect;
     }
 });
 
 Bullet.getOrCreateBullet = function (bulletSpeed, weaponType, attackMode, zOrder, mode) {
     /**/
-    var selChild = null;
+    var j, selChild = null;
     if (mode == MW.UNIT_TAG.PLAYER_BULLET) {
-        for (var j = 0; j < MW.CONTAINER.PLAYER_BULLETS.length; j++) {
-            selChild = MW.CONTAINER.PLAYER_BULLETS[j];
+        var playerBullets = MW.CONTAINER.PLAYER_BULLETS;
+        for (j = 0; j < playerBullets.length; j++) {
+            selChild = playerBullets[j];
             if (selChild.active == false) {
                 selChild.visible = true;
                 selChild.HP = 1;
@@ -50,10 +56,10 @@ Bullet.getOrCreateBullet = function (bulletSpeed, weaponType, attackMode, zOrder
                 return selChild;
             }
         }
-    }
-    else {
-        for (var j = 0; j < MW.CONTAINER.ENEMY_BULLETS.length; j++) {
-            selChild = MW.CONTAINER.ENEMY_BULLETS[j];
+    } else {
+        var enemyBullets = MW.CONTAINER.ENEMY_BULLETS;
+        for (j = 0; j < enemyBullets.length; j++) {
+            selChild = enemyBullets[j];
             if (selChild.active == false) {
                 selChild.visible = true;
                 selChild.HP = 1;
@@ -78,13 +84,13 @@ Bullet.create = function (bulletSpeed, weaponType, attackMode, zOrder, mode) {
 };
 
 Bullet.preSet = function () {
-    var bullet = null;
-    for (var i = 0; i < 10; i++) {
-        var bullet = Bullet.create(MW.BULLET_SPEED.SHIP, "W1.png", MW.ENEMY_ATTACK_MODE.NORMAL, 3000, MW.UNIT_TAG.PLAYER_BULLET);
+    var bullet = null, i;
+    for (i = 0; i < 10; i++) {
+        bullet = Bullet.create(MW.BULLET_SPEED.SHIP, "W1.png", MW.ENEMY_ATTACK_MODE.NORMAL, 3000, MW.UNIT_TAG.PLAYER_BULLET);
         bullet.visible = false;
         bullet.active = false;
     }
-    for (var i = 0; i < 10; i++) {
+    for (i = 0; i < 10; i++) {
         bullet = Bullet.create(MW.BULLET_SPEED.ENEMY, "W2.png", MW.ENEMY_ATTACK_MODE.NORMAL, 3000, MW.UNIT_TAG.ENMEY_BULLET);
         bullet.visible = false;
         bullet.active = false;

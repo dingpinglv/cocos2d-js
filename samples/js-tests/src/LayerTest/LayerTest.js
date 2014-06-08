@@ -542,6 +542,7 @@ var LayerGradient = LayerTest.extend({
 var arrayOfLayerTest = [
     LayerTest1,
     LayerTest2,
+    LayerGradient,
     LayerTestBlend,
     IgnoreAnchorpointTest1,
     IgnoreAnchorpointTest2,

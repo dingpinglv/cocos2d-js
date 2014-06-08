@@ -387,9 +387,7 @@ var g_box2d = [
 
 var g_cocosdeshion = [
     "res/Sound/background.mp3",
-    "res/Sound/effect2.mp3",
-    "res/Sound/background.ogg",
-    "res/Sound/effect2.ogg"
+    "res/Sound/effect2.mp3"
 ];
 
 var g_parallax = [
