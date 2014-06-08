@@ -38,9 +38,9 @@ Explosion.sharedExplosion = function () {
 };
 
 Explosion.getOrCreateExplosion = function () {
-    var selChild =null;
-    for (var j = 0; j < MW.CONTAINER.EXPLOSIONS.length; j++) {
-        var selChild = MW.CONTAINER.EXPLOSIONS[j];
+    var selChild =null, explosions = MW.CONTAINER.EXPLOSIONS;
+    for (var j = 0; j < explosions.length; j++) {
+        selChild = explosions[j];
         if (selChild.active == false) {
             selChild.visible = true;
             selChild.active = true;

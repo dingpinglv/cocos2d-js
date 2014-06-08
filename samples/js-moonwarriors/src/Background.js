@@ -19,9 +19,9 @@ BackSky.create = function () {
 };
 
 BackSky.getOrCreate = function () {
-    var selChild = null;
-    for (var j = 0; j < MW.CONTAINER.BACKSKYS.length; j++) {
-        selChild = MW.CONTAINER.BACKSKYS[j];
+    var selChild = null, backSkies = MW.CONTAINER.BACKSKYS;
+    for (var j = 0; j < backSkies.length; j++) {
+        selChild = backSkies[j];
         if (selChild.active == false) {
             selChild.visible = true;
             selChild.active = true;
@@ -70,9 +70,9 @@ BackTileMap.create = function (frameName) {
 };
 
 BackTileMap.getOrCreate = function () {
-    var selChild = null;
-    for (var j = 0; j < MW.CONTAINER.BACKTILEMAPS.length; j++) {
-        selChild = MW.CONTAINER.BACKTILEMAPS[j];
+    var selChild = null, backMaps = MW.CONTAINER.BACKTILEMAPS;
+    for (var j = 0; j < backMaps.length; j++) {
+        selChild = backMaps[j];
         if (selChild.active == false) {
             selChild.visible = true;
             selChild.active = true;

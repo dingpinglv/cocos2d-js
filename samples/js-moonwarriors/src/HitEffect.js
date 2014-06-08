@@ -21,9 +21,9 @@ var HitEffect = cc.Sprite.extend({
 });
 
 HitEffect.getOrCreateHitEffect = function (x, y, rotation, scale) {
-    var selChild = null;
-    for (var j = 0; j < MW.CONTAINER.HITS.length; j++) {
-        selChild = MW.CONTAINER.HITS[j];
+    var selChild = null, hits = MW.CONTAINER.HITS;
+    for (var j = 0; j < hits.length; j++) {
+        selChild = hits[j];
         if (selChild.active == false) {
             selChild.visible = true;
             selChild.active = true;

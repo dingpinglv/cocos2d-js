@@ -6,7 +6,8 @@
     "renderMode" : 1,
     "engineDir":"../../frameworks/cocos2d-html5",
 
-    "modules" : ["cocos2d"],
+    "modules" : ["core", "actions", "transitions", "labels",
+        "menus", "tilemap", "audio"],
 
     "jsList" : [
         "src/Resource.js",

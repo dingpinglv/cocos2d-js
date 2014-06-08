@@ -69,7 +69,8 @@ var GameLayer = cc.Layer.extend({
             this.screenRect = cc.rect(0, 0, winSize.width, winSize.height + 10);
 
             // score
-            this.lbScore = cc.LabelBMFont.create("Score: 0", res.arial_14_fnt);
+            //this.lbScore = cc.LabelBMFont.create("Score: 0", res.arial_14_fnt);
+            this.lbScore = cc.LabelTTF.create("Score: 0", "Arial", 12);
             this.lbScore.attr({
 	            anchorX: 1,
                 anchorY: 0,
@@ -192,14 +193,14 @@ var GameLayer = cc.Layer.extend({
     checkIsCollide:function () {
         var selChild, bulletChild;
         // check collide
-        var i, locShip =this._ship;
-        for (i = 0; i < MW.CONTAINER.ENEMIES.length; i++) {
-            selChild = MW.CONTAINER.ENEMIES[i];
+        var i, locShip =this._ship, enemies = MW.CONTAINER.ENEMIES, playerBullets = MW.CONTAINER.PLAYER_BULLETS;
+        for (i = 0; i < enemies.length; i++) {
+            selChild = enemies[i];
             if (!selChild.active)
                 continue;
 
-            for (var j = 0; j < MW.CONTAINER.PLAYER_BULLETS.length; j++) {
-                bulletChild = MW.CONTAINER.PLAYER_BULLETS[j];
+            for (var j = 0; j < playerBullets.length; j++) {
+                bulletChild = playerBullets[j];
                 if (bulletChild.active && this.collide(selChild, bulletChild)) {
                     bulletChild.hurt();
                     selChild.hurt();
@@ -213,8 +214,9 @@ var GameLayer = cc.Layer.extend({
             }
         }
 
-        for (i = 0; i < MW.CONTAINER.ENEMY_BULLETS.length; i++) {
-            selChild = MW.CONTAINER.ENEMY_BULLETS[i];
+        var enemyBullets = MW.CONTAINER.ENEMY_BULLETS;
+        for (i = 0; i < enemyBullets.length; i++) {
+            selChild = enemyBullets[i];
             if (selChild.active && this.collide(selChild, locShip)) {
                 if (locShip.active) {
                     selChild.hurt();
@@ -225,14 +227,15 @@ var GameLayer = cc.Layer.extend({
     },
     removeInactiveUnit:function (dt) {
         var selChild, children = this._texOpaqueBatch.children;
-        for (var i in children) {
+        var i, len;
+        for (i = 0, len = children.length;i < len;i++) {
             selChild = children[i];
             if (selChild && selChild.active)
                 selChild.update(dt);
         }
 
         children = this._texTransparentBatch.children;
-        for (i in children) {
+        for (i = 0, len = children.length;i < len;i++) {
             selChild = children[i];
             if (selChild && selChild.active)
                 selChild.update(dt);

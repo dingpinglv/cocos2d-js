@@ -40,7 +40,7 @@ var g_mainmenu = [
 	res.b01_png,
     res.b01_plist,
     res.mainMainMusic_mp3,
-    res.mainMainMusic_ogg,
+    //res.mainMainMusic_ogg,
     res.menuTitle_png,
     res.textureTransparentPack_plist,
     res.textureTransparentPack_png
@@ -63,17 +63,17 @@ var g_maingame = [
 
     //music
     res.bgMusic_mp3,
-    res.bgMusic_ogg,
+    //res.bgMusic_ogg,   load one type format sound only
 
     //effect
     res.buttonEffet_mp3,
     res.explodeEffect_mp3,
     res.fireEffect_mp3,
     res.shipDestroyEffect_mp3,
-    res.buttonEffet_ogg,
-    res.explodeEffect_ogg,
-    res.fireEffect_ogg,
-    res.shipDestroyEffect_ogg,
+    //res.buttonEffet_ogg,
+    //res.explodeEffect_ogg,
+    //res.fireEffect_ogg,
+    //res.shipDestroyEffect_ogg,
 
     // FNT
     res.arial_14_fnt

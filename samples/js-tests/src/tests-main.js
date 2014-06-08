@@ -206,6 +206,21 @@ var TestController = cc.LayerGradient.extend({
 TestController.YOffset = 0;
 var testNames = [
     {
+        title:"RenderTexture Test",
+        platforms: PLATFORM_ALL,
+        testScene:function () {
+            return new RenderTextureTestScene();
+        }
+    },
+    {
+        title:"Transitions Test",
+        resource:g_transitions,
+        platforms: PLATFORM_ALL,
+        testScene:function () {
+            return new TransitionsTestScene();
+        }
+    },
+    {
         title:"ActionManager Test",
         platforms: PLATFORM_ALL,
         testScene:function () {

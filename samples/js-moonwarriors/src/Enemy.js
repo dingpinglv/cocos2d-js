@@ -41,7 +41,6 @@ var Enemy = cc.Sprite.extend({
             this.active = false;
             this.destroy();
         }
-
     },
     destroy:function () {
         MW.SCORE += this.scoreValue;
@@ -50,7 +49,7 @@ var Enemy = cc.Sprite.extend({
 	        x: this.x,
 	        y: this.y
         });
-        SparkEffect.getOrCreateSparkEffect(this.x, this.y);
+        //SparkEffect.getOrCreateSparkEffect(this.x, this.y);
         if (MW.SOUND) {
 	        cc.audioEngine.playEffect(res.explodeEffect_mp3);
         }
@@ -77,9 +76,9 @@ var Enemy = cc.Sprite.extend({
 });
 
 Enemy.getOrCreateEnemy = function (arg) {
-    var selChild = null;
-    for (var j = 0; j < MW.CONTAINER.ENEMIES.length; j++) {
-        selChild = MW.CONTAINER.ENEMIES[j];
+    var selChild = null, enemies = MW.CONTAINER.ENEMIES;
+    for (var j = 0; j < enemies.length; j++) {
+        selChild = enemies[j];
 
         if (selChild.active == false && selChild.enemyType == arg.type) {
             selChild.HP = arg.HP;
