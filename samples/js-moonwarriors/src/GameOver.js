@@ -45,20 +45,19 @@ var GameOver = cc.Layer.extend({
             lbScore.color = cc.color(250,179,0);
             this.addChild(lbScore,10);
 
-            var b1 = cc.LabelTTF.create("Download Cocos2d-html5","Arial",14);
+            var b1 = cc.LabelTTF.create("Download Cocos2d-JS","Arial",14);
             var b2 = cc.LabelTTF.create("Download This Sample","Arial",14);
             var menu1 = cc.MenuItemLabel.create(b1,function(){
-                window.location.href = "http://www.cocos2d-x.org/projects/cocos2d-x/wiki/Cocos2d-html5";
+                window.location.href = "http://www.cocos2d-x.org/download";
             });
             var menu2 = cc.MenuItemLabel.create(b2,function(){
-                window.location.href = "https://github.com/ShengxiangChen/MoonWarriors";
+                window.location.href = "https://github.com/cocos2d/cocos2d-js";
             });
             var cocos2dMenu = cc.Menu.create(menu1,menu2);
             cocos2dMenu.alignItemsVerticallyWithPadding(10);
             cocos2dMenu.x = 160;
 	        cocos2dMenu.y = 80;
             this.addChild(cocos2dMenu);
-
 
             if(MW.SOUND){
 	            cc.audioEngine.playMusic(res.mainMainMusic_mp3);

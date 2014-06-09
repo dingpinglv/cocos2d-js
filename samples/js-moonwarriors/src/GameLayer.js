@@ -109,7 +109,7 @@ var GameLayer = cc.Layer.extend({
             Explosion.sharedExplosion();
 
             // accept touch now!
-           if (cc.sys.capabilities.hasOwnProperty('keyboard'))
+           if (!cc.sys.isMobile && cc.sys.capabilities.hasOwnProperty('keyboard'))
                 cc.eventManager.addListener({
                     event: cc.EventListener.KEYBOARD,
                     onKeyPressed:function (key, event) {
@@ -172,12 +172,8 @@ var GameLayer = cc.Layer.extend({
     processEvent:function (event) {
         if (this._state == STATE_PLAYING) {
             var delta = event.getDelta();
-            var curPos = cc.p(this._ship.x, this._ship.y);
-            curPos = cc.pAdd(curPos, delta);
-            curPos = cc.pClamp(curPos, cc.p(0, 0), cc.p(winSize.width, winSize.height));
-            this._ship.x = curPos.x;
-	        this._ship.y = curPos.y;
-	        curPos = null;
+            this._ship.x += delta.x;
+            this._ship.y += delta.y;
         }
     },
 
@@ -202,7 +198,7 @@ var GameLayer = cc.Layer.extend({
             for (var j = 0; j < playerBullets.length; j++) {
                 bulletChild = playerBullets[j];
                 if (bulletChild.active && this.collide(selChild, bulletChild)) {
-                    bulletChild.hurt();
+                    bulletChild.destroy();
                     selChild.hurt();
                 }
             }
@@ -219,7 +215,7 @@ var GameLayer = cc.Layer.extend({
             selChild = enemyBullets[i];
             if (selChild.active && this.collide(selChild, locShip)) {
                 if (locShip.active) {
-                    selChild.hurt();
+                    selChild.destroy();
                     locShip.hurt();
                 }
             }
@@ -266,9 +262,12 @@ var GameLayer = cc.Layer.extend({
         if (Math.abs(ax - bx) > MAX_CONTAINT_WIDTH || Math.abs(ay - by) > MAX_CONTAINT_HEIGHT)
             return false;
 
-        var aRect = a.collideRect(ax, ay);
-        var bRect = b.collideRect(bx, by);
-        return cc.rectIntersectsRect(aRect, bRect);
+        var ra = a._collideRect, rb = b._collideRect;
+        var minax = ax + ra.x, maxax = minax + ra.width,
+            minay = ay + ra.y, maxay = minay + ra.height,
+            minbx = bx + rb.x, maxbx = minbx + rb.width,
+            minby = by + rb.y, maxby = minby + rb.height;
+        return !(maxax < minbx || maxbx < minax || maxay < minby || maxby < minay);
     },
     initBackground:function () {
         this._backSky = BackSky.getOrCreate();

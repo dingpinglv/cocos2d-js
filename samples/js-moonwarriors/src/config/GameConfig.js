@@ -41,7 +41,7 @@ MW.LIFE = 4;
 MW.SCORE = 0;
 
 //sound
-MW.SOUND = true;
+MW.SOUND = false;
 
 //enemy move type
 MW.ENEMY_MOVE_TYPE = {
@@ -107,3 +107,6 @@ MW.BULLET_SPEED = {
 };
 // the counter of active enemies
 MW.ACTIVE_ENEMIES = 0;
+
+// Activate explosion or not
+MW.ENABLE_EXPLOSIONS = false;

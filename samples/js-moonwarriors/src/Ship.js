@@ -13,11 +13,14 @@ var Ship = cc.Sprite.extend({
     _hurtColorLife:0,
     active:true,
     bornSprite:null,
+    _collideRect:null,
     ctor:function () {
         this._super("#ship01.png");
         this.tag = this.zOrder;
         this.x = this.appearPosition.x;
 	    this.y = this.appearPosition.y;
+        var w = this.width, h = this.height;
+        this._collideRect = cc.rect(- w / 2, - h / 2, w, h / 2);
 
         // set frame
         var frame0 = cc.spriteFrameCache.getSpriteFrame("ship01.png");
@@ -31,7 +34,7 @@ var Ship = cc.Sprite.extend({
         var animation = cc.Animation.create(animFrames, 0.1);
         var animate = cc.Animate.create(animation);
         this.runAction(cc.RepeatForever.create(animate));
-        this.schedule(this.shoot, 1 / 6);
+        this.schedule(this.shoot, 1 / 7);
 
         this.initBornSprite();
         this.born();
@@ -66,15 +69,9 @@ var Ship = cc.Sprite.extend({
         }
     },
     shoot:function (dt) {
-        //this.shootEffect();
-        var offset = 13;
-        var a = Bullet.getOrCreateBullet(this.bulletSpeed, "W1.png", MW.ENEMY_ATTACK_MODE.NORMAL, 3000, MW.UNIT_TAG.PLAYER_BULLET);
-        a.x = this.x + offset;
+        var a = Bullet.getOrCreateBullet(this.bulletSpeed, "W1_1.png", MW.ENEMY_ATTACK_MODE.NORMAL, 3000, MW.UNIT_TAG.PLAYER_BULLET);
+        a.x = this.x;
 	    a.y = this.y + 3 + this.height * 0.3;
-
-        var b = Bullet.getOrCreateBullet(this.bulletSpeed, "W1.png", MW.ENEMY_ATTACK_MODE.NORMAL, 3000, MW.UNIT_TAG.PLAYER_BULLET);
-        b.x = this.x - offset;
-	    b.y = this.y + 3 + this.height * 0.3;
     },
     destroy:function () {
         MW.LIFE--;
@@ -92,10 +89,6 @@ var Ship = cc.Sprite.extend({
             this._hurtColorLife = 2;
             this.HP--;
         }
-    },
-    collideRect:function (x, y) {
-        var w = this.width, h = this.height;
-        return cc.rect(x - w / 2, y - h / 2, w, h / 2);
     },
     initBornSprite:function () {
         this.bornSprite = cc.Sprite.create("#ship03.png");
