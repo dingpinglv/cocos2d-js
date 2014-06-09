@@ -10,35 +10,34 @@ var Bullet = cc.Sprite.extend({
     attackMode:MW.ENEMY_MOVE_TYPE.NORMAL,
     parentType:MW.BULLET_TYPE.PLAYER,
     _collideRect:null,
+    sw: 0,
+    sh: 0,
     ctor:function (bulletSpeed, weaponType, attackMode) {
         this._super("#"+weaponType);
 
         this.yVelocity = -bulletSpeed;
         this.attackMode = attackMode;
         this.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
-        this._collideRect = cc.rect(-3, -3, 6, 6);
+        this._collideRect = cc.rect(-28, -20, 56, 40);
+
+        this.sw = g_sharedGameLayer.screenRect.width;
+        this.sh = g_sharedGameLayer.screenRect.height;
     },
     update:function (dt) {
-        var x = this.x, y = this.y;
-        this.x = x - this.xVelocity * dt;
-	    this.y = y - this.yVelocity * dt;
-        if (x < 0 || x > g_sharedGameLayer.screenRect.width || y < 0 || y > g_sharedGameLayer.screenRect.height || this.HP <= 0) {
+        var x = this.x -= this.xVelocity * dt;
+	    var y = this.y -= this.yVelocity * dt;
+        if (x < 0 || x > this.sw || y < 0 || y > this.sh || this.HP <= 0) {
             this.destroy();
         }
     },
     destroy:function () {
-        HitEffect.getOrCreateHitEffect(this.x, this.y, Math.random() * 360, 0.75);
+        if (MW.ENABLE_EXPLOSIONS)
+            HitEffect.getOrCreateHitEffect(this.x, this.y, Math.random() * 360, 0.75);
         this.active = false;
         this.visible = false;
     },
     hurt:function () {
         this.HP--;
-    },
-    collideRect:function (x, y) {
-        var locRect = this._collideRect;
-        locRect.x = x - 3;
-        locRect.y = y - 3;
-        return locRect;
     }
 });
 
@@ -86,7 +85,7 @@ Bullet.create = function (bulletSpeed, weaponType, attackMode, zOrder, mode) {
 Bullet.preSet = function () {
     var bullet = null, i;
     for (i = 0; i < 10; i++) {
-        bullet = Bullet.create(MW.BULLET_SPEED.SHIP, "W1.png", MW.ENEMY_ATTACK_MODE.NORMAL, 3000, MW.UNIT_TAG.PLAYER_BULLET);
+        bullet = Bullet.create(MW.BULLET_SPEED.SHIP, "W1_1.png", MW.ENEMY_ATTACK_MODE.NORMAL, 3000, MW.UNIT_TAG.PLAYER_BULLET);
         bullet.visible = false;
         bullet.active = false;
     }

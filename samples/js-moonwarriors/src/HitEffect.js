@@ -27,6 +27,7 @@ HitEffect.getOrCreateHitEffect = function (x, y, rotation, scale) {
         if (selChild.active == false) {
             selChild.visible = true;
             selChild.active = true;
+            selChild.opacity = 255;
             selChild.reset(x, y, rotation, scale);
             return selChild;
         }

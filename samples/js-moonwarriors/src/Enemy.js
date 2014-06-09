@@ -9,9 +9,10 @@ var Enemy = cc.Sprite.extend({
     moveType:null,
     scoreValue:200,
     zOrder:1000,
-    delayTime:1 + 1.2 * Math.random(),
+    delayTime: 1.5 + 1.5 * Math.random(),
     attackMode:MW.ENEMY_MOVE_TYPE.NORMAL,
     _hurtColorLife:0,
+    _collideRect: null,
     ctor:function (arg) {
         this._super("#"+arg.textureName);
 
@@ -21,6 +22,9 @@ var Enemy = cc.Sprite.extend({
         this.attackMode = arg.attackMode;
         this.enemyType = arg.type;
         this.schedule(this.shoot, this.delayTime);
+
+        var w = this.width, h = this.height;
+        this._collideRect = cc.rect(- w / 2, - h / 4, w, h / 2+20);
     },
     _timeTick:0,
     update:function (dt) {
@@ -44,12 +48,15 @@ var Enemy = cc.Sprite.extend({
     },
     destroy:function () {
         MW.SCORE += this.scoreValue;
-        var a = Explosion.getOrCreateExplosion();
-        a.attr({
-	        x: this.x,
-	        y: this.y
-        });
-        //SparkEffect.getOrCreateSparkEffect(this.x, this.y);
+        if (MW.ENABLE_EXPLOSIONS) {
+            var a = Explosion.getOrCreateExplosion();
+            a.attr({
+                x: this.x,
+                y: this.y
+            });
+            SparkEffect.getOrCreateSparkEffect(this.x, this.y);
+        }
+        else HitEffect.getOrCreateHitEffect(this.x, this.y, Math.random() * 360, 0.75);
         if (MW.SOUND) {
 	        cc.audioEngine.playEffect(res.explodeEffect_mp3);
         }
@@ -68,10 +75,6 @@ var Enemy = cc.Sprite.extend({
     hurt:function () {
         this._hurtColorLife = 2;
         this.HP--;
-    },
-    collideRect:function (x, y) {
-        var w = this.width, h = this.height;
-        return cc.rect(x - w / 2, y - h / 4, w, h / 2+20);
     }
 });
 
