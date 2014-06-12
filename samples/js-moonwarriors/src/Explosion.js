@@ -4,13 +4,13 @@ var Explosion = cc.Sprite.extend({
     active:true,
     animation:null,
     ctor:function () {
-        var pFrame = cc.spriteFrameCache.getSpriteFrame("explosion_01.png");
+        var pFrame = cc.spriteFrameCache.getSpriteFrame("explosion_0");
         this._super(pFrame);
-        this.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
+        //this.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
 
         this.tmpWidth = this.width;
         this.tmpHeight = this.height;
-        this.animation = cc.animationCache.getAnimation("Explosion");
+        this.animation = Explosion.explodeAnimation;
     },
     play:function(){
         //return;
@@ -26,15 +26,7 @@ var Explosion = cc.Sprite.extend({
 });
 
 Explosion.sharedExplosion = function () {
-    var animFrames = [];
-    var str = "";
-    for (var i = 1; i < 35; i++) {
-        str = "explosion_" + (i < 10 ? ("0" + i) : i) + ".png";
-        var frame = cc.spriteFrameCache.getSpriteFrame(str);
-        animFrames.push(frame);
-    }
-    var animation = cc.Animation.create(animFrames, 0.04);
-    cc.animationCache.addAnimation(animation, "Explosion");
+    cc.animationCache.addAnimation(Explosion.explodeAnimation, "Explosion");
 };
 
 Explosion.getOrCreateExplosion = function () {
@@ -60,6 +52,24 @@ Explosion.create = function () {
 };
 
 Explosion.preSet = function () {
+    var size = 64;
+    var frames = [];
+    var rect = cc.rect(0, 0, size, size);
+    var name = "explosion_";
+    var count = 0;
+    for (var r = 0; r < 4; r++) {
+        for (var c = 0; c < 8; c++) {
+            rect.x = c * size;
+            rect.y = r * size;
+            var frame = cc.SpriteFrame.create(res.explode_png, rect);
+            cc.spriteFrameCache.addSpriteFrame(frame, name + count);
+            frames.push(frame);
+            count++;
+        }
+    }
+
+    Explosion.explodeAnimation = new cc.Animation(frames, 0.02);
+
     var explosion = null;
     for (var i = 0; i < 6; i++) {
         explosion = Explosion.create();
@@ -67,3 +77,5 @@ Explosion.preSet = function () {
         explosion.active = false;
     }
 };
+
+Explosion.explodeAnimation = null;

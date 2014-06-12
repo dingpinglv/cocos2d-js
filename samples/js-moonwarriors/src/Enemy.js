@@ -48,15 +48,10 @@ var Enemy = cc.Sprite.extend({
     },
     destroy:function () {
         MW.SCORE += this.scoreValue;
-        if (MW.ENABLE_EXPLOSIONS) {
-            var a = Explosion.getOrCreateExplosion();
-            a.attr({
-                x: this.x,
-                y: this.y
-            });
-            SparkEffect.getOrCreateSparkEffect(this.x, this.y);
-        }
-        else HitEffect.getOrCreateHitEffect(this.x, this.y, Math.random() * 360, 0.75);
+        var a = Explosion.getOrCreateExplosion();
+        a.x = this.x;
+        a.y = this.y;
+        //SparkEffect.getOrCreateSparkEffect(this.x, this.y);
         if (MW.SOUND) {
 	        cc.audioEngine.playEffect(res.explodeEffect_mp3);
         }

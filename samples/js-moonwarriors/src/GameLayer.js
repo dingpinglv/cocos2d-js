@@ -101,10 +101,9 @@ var GameLayer = cc.Layer.extend({
             this._texTransparentBatch.addChild(this._ship, this._ship.zOrder, MW.UNIT_TAG.PLAYER);
 
             // explosion batch node
-            cc.spriteFrameCache.addSpriteFrames(res.explosion_plist);
-            var explosionTexture = cc.textureCache.addImage(res.explosion_png);
+            var explosionTexture = cc.textureCache.addImage(res.explode_png);
             this._explosions = cc.SpriteBatchNode.create(explosionTexture);
-            this._explosions.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
+            //this._explosions.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
             this.addChild(this._explosions);
             Explosion.sharedExplosion();
 
@@ -172,8 +171,13 @@ var GameLayer = cc.Layer.extend({
     processEvent:function (event) {
         if (this._state == STATE_PLAYING) {
             var delta = event.getDelta();
-            this._ship.x += delta.x;
-            this._ship.y += delta.y;
+            var x = this._ship.x + delta.x;
+            var y = this._ship.y + delta.y;
+            if (x < 0) x = 0;
+            else if (x > winSize.width) x = winSize.width;
+            if (y < 0) y = 0;
+            else if (y > winSize.height) y = winSize.height;
+            this._ship.setPosition(x, y);
         }
     },
 

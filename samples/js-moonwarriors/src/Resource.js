@@ -5,20 +5,16 @@ var res = {
     buttonEffet_ogg : 'res/Music/buttonEffet.ogg',
     explodeEffect_mp3 : 'res/Music/explodeEffect.mp3',
     explodeEffect_ogg : 'res/Music/explodeEffect.ogg',
-    fireEffect_mp3 : 'res/Music/fireEffect.mp3',         //unused
-    fireEffect_ogg : 'res/Music/fireEffect.ogg',         //unused
+    fireEffect_mp3 : 'res/Music/fireEffect.mp3',
     mainMainMusic_mp3 : 'res/Music/mainMainMusic.mp3',
     mainMainMusic_ogg : 'res/Music/mainMainMusic.ogg',
     shipDestroyEffect_mp3 : 'res/Music/shipDestroyEffect.mp3',
     shipDestroyEffect_ogg : 'res/Music/shipDestroyEffect.ogg',
-    arial_14_fnt : 'res/arial-14.fnt',
-    arial_14_png : 'res/arial-14.png',
     b01_plist : 'res/b01.plist',
     b01_png : 'res/b01.png',
     cocos2d_html5_png : 'res/cocos2d-html5.png',
-    explode_plist : 'res/explode.plist',              //unused
-    explosion_plist : 'res/explosion.plist',
-    explosion_png : 'res/explosion.png',
+    explode_png : 'res/explode.png',
+    smallexplode_png : 'res/smallexplode.png',
     flare_jpg : 'res/flare.jpg',
     gameOver_png : 'res/gameOver.png',
     level01_tmx : 'res/level01.tmx',
@@ -50,15 +46,14 @@ var g_maingame = [
     //image
     res.cocos2d_html5_png,
     res.gameOver_png,
-    res.arial_14_png,
-    res.explosion_png,
+    res.explode_png,
+    res.smallexplode_png,
     res.textureOpaquePack_png,
 
     //tmx
     //res.level01_tmx,
 
     //plist
-    res.explosion_plist,
     res.textureOpaquePack_plist,
 
     //music
@@ -69,12 +64,9 @@ var g_maingame = [
     res.buttonEffet_mp3,
     res.explodeEffect_mp3,
     res.fireEffect_mp3,
-    res.shipDestroyEffect_mp3,
+    res.shipDestroyEffect_mp3
     //res.buttonEffet_ogg,
     //res.explodeEffect_ogg,
     //res.fireEffect_ogg,
     //res.shipDestroyEffect_ogg,
-
-    // FNT
-    res.arial_14_fnt
 ];

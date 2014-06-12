@@ -1,8 +1,8 @@
 var HitEffect = cc.Sprite.extend({
     active:true,
     ctor:function () {
-        this._super("#hit.png");
-        this.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
+        this._super("#smallexplosion_0");
+        //this.setBlendFunc(cc.SRC_ALPHA, cc.ONE);
     },
     reset:function (x, y, rotation, scale) {
         this.attr({
@@ -11,7 +11,7 @@ var HitEffect = cc.Sprite.extend({
 	        rotation: rotation,
 	        scale: scale
         });
-        this.runAction(cc.ScaleBy.create(0.3, 2, 2));
+        this.runAction(cc.Animate.create(HitEffect.explodeAnimation));
         this.runAction(cc.Sequence.create(cc.FadeOut.create(0.3), cc.CallFunc.create(this.destroy, this)));
     },
     destroy:function () {
@@ -45,6 +45,24 @@ HitEffect.create = function () {
 };
 
 HitEffect.preSet = function () {
+    var size = 32;
+    var frames = [];
+    var rect = cc.rect(0, 0, 32, 32);
+    var name = "smallexplosion_";
+    var count = 0;
+    for (var r = 0; r < 3; r++) {
+        for (var c = 0; c < 4; c++) {
+            rect.x = c * 32;
+            rect.y = r * 32;
+            var frame = cc.SpriteFrame.create(res.smallexplode_png, rect);
+            cc.spriteFrameCache.addSpriteFrame(frame, name + count);
+            frames.push(frame);
+            count++;
+        }
+    }
+
+    HitEffect.explodeAnimation = new cc.Animation(frames, 0.02);
+
     var hitEffect = null;
     for (var i = 0; i < 10; i++) {
         hitEffect = HitEffect.create();
@@ -52,3 +70,5 @@ HitEffect.preSet = function () {
         hitEffect.active = false;
     }
 };
+
+HitEffect.explodeAnimation = null;
