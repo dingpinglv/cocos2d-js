@@ -25,6 +25,12 @@
 
 var s_testArray = [
     {
+        title: "UIRichTextTest",
+        func: function () {
+            return new UIRichTextTest();
+        }
+    },
+    {
         title: "UIButtonTest",
         func: function () {
             return new UIButtonTest();
