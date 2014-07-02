@@ -30,7 +30,7 @@ var UILayoutTestBase = UIScene.extend({
     button_scale9: null,
     init: function () {
         if (this._super()) {
-            var widgetSize = this._widget.getSize();
+            var widgetSize = this._widget.getContentSize();
             //init text
             this._topDisplayLabel.setString("");
             this._bottomDisplayLabel.setString(this.getText());
@@ -41,8 +41,8 @@ var UILayoutTestBase = UIScene.extend({
 
             // Create the layout
             this.layout = this.createLayout();
-            var  layoutRect = this.layout.getSize();
-            var backgroundRect = background.getSize();
+            var  layoutRect = this.layout.getContentSize();
+            var backgroundRect = background.getContentSize();
             this.layout.x = (widgetSize.width - backgroundRect.width) / 2 + (backgroundRect.width - layoutRect.width) / 2;
 	        this.layout.y = (widgetSize.height - backgroundRect.height) / 2 + (backgroundRect.height - layoutRect.height) / 2;
             this._mainNode.addChild(this.layout);
@@ -161,17 +161,17 @@ var UILayoutTest_Layout_Linear_Vertical = UILayoutTestBase.extend({
     setLayoutParameter: function () {
         var lp1 = ccui.LinearLayoutParameter.create();
         this.button.setLayoutParameter(lp1);
-        lp1.setGravity(ccui.LINEAR_GRAVITY_CENTER_HORIZONTAL);
+        lp1.setGravity(ccui.LinearLayoutParameter.CENTER_HORIZONTAL);
         lp1.setMargin(new ccui.Margin(0, 5, 0, 10));
 
         var lp2 = ccui.LinearLayoutParameter.create();
         this.textButton.setLayoutParameter(lp2);
-        lp2.setGravity(ccui.LINEAR_GRAVITY_CENTER_HORIZONTAL);
+        lp2.setGravity(ccui.LinearLayoutParameter.CENTER_HORIZONTAL);
         lp2.setMargin(new ccui.Margin(0, 10, 0, 10));
 
         var lp3 = ccui.LinearLayoutParameter.create();
         this.button_scale9.setLayoutParameter(lp3);
-        lp3.setGravity(ccui.LINEAR_GRAVITY_CENTER_HORIZONTAL);
+        lp3.setGravity(ccui.LinearLayoutParameter.CENTER_HORIZONTAL);
         lp3.setMargin(new ccui.Margin(0, 10, 0, 10));
     }
 });
@@ -189,17 +189,17 @@ var UILayoutTest_Layout_Linear_Horizontal = UILayoutTestBase.extend({
     setLayoutParameter: function () {
         var lp1 = ccui.LinearLayoutParameter.create();
         this.button.setLayoutParameter(lp1);
-        lp1.setGravity(ccui.LINEAR_GRAVITY_CENTER_VERTICAL);
+        lp1.setGravity(ccui.LinearLayoutParameter.CENTER_VERTICAL);
         lp1.setMargin(new ccui.Margin(0, 10, 0, 10));
 
         var lp2 = ccui.LinearLayoutParameter.create();
         this.textButton.setLayoutParameter(lp2);
-        lp2.setGravity(ccui.LINEAR_GRAVITY_CENTER_VERTICAL);
+        lp2.setGravity(ccui.LinearLayoutParameter.CENTER_VERTICAL);
         lp2.setMargin(new ccui.Margin(0, 10, 0, 10));
 
         var lp3 = ccui.LinearLayoutParameter.create();
         this.button_scale9.setLayoutParameter(lp3);
-        lp3.setGravity(ccui.LINEAR_GRAVITY_CENTER_VERTICAL);
+        lp3.setGravity(ccui.LinearLayoutParameter.CENTER_VERTICAL);
         lp3.setMargin(new ccui.Margin(0, 10, 0, 10));
     }
 });
@@ -219,14 +219,14 @@ var UILayoutTest_Layout_Relative = UILayoutTestBase.extend({
     setLayoutParameter: function () {
         var lp1 = ccui.RelativeLayoutParameter.create();
         this.button.setLayoutParameter(lp1);
-        lp1.setGravity(ccui.RELATIVE_ALIGN_PARENT_LEFT_BOTTOM);
+        lp1.setGravity(ccui.RelativeLayoutParameter.PARENT_LEFT_BOTTOM);
 
         var lp2 = ccui.RelativeLayoutParameter.create();
         this.textButton.setLayoutParameter(lp2);
-        lp2.setGravity(ccui.RELATIVE_ALIGN_PARENT_LEFT_BOTTOM);
+        lp2.setGravity(ccui.RelativeLayoutParameter.PARENT_LEFT_BOTTOM);
 
         var lp3 = ccui.RelativeLayoutParameter.create();
         this.button_scale9.setLayoutParameter(lp3);
-        lp3.setGravity(ccui.RELATIVE_ALIGN_PARENT_RIGHT_CENTER_VERTICAL);
+        lp3.setGravity(ccui.RelativeLayoutParameter.PARENT_RIGHT_CENTER_VERTICAL);
     }
 });
