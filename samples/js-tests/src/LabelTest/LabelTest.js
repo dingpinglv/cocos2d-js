@@ -1582,7 +1582,7 @@ var BMFontMultiLineAlignmentTest = AtlasDemo.extend({
         }
     },
     onMouseMove:function (touch) {
-        if(event.getButton == undefined || event.getButton() == undefined)
+        if(!event.getButton || event.getButton() != cc.EventMouse.BUTTON_LEFT)
             return;
 
         var location = touch.getLocation();
@@ -1900,8 +1900,8 @@ var nextLabelTest = function () {
     labelTestIdx++;
     labelTestIdx = labelTestIdx % arrayOfLabelTest.length;
 
-    if(window.sidebar){
-        labelTestIdx = window.sidebar.changeTest(labelTestIdx, 19);
+    if(window.sideIndexBar){
+        labelTestIdx = window.sideIndexBar.changeTest(labelTestIdx, 19);
     }
 
     return new arrayOfLabelTest[labelTestIdx]();
@@ -1911,8 +1911,8 @@ var previousLabelTest = function () {
     if (labelTestIdx < 0)
         labelTestIdx += arrayOfLabelTest.length;
 
-    if(window.sidebar){
-        labelTestIdx = window.sidebar.changeTest(labelTestIdx, 19);
+    if(window.sideIndexBar){
+        labelTestIdx = window.sideIndexBar.changeTest(labelTestIdx, 19);
     }
 
     return new arrayOfLabelTest[labelTestIdx]();

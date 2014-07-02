@@ -43,7 +43,7 @@ var UIListViewTest_Vertical = UIScene.extend({
             listView.setBounceEnabled(true);
             listView.setBackGroundImage("res/cocosui/green_edit.png");
             listView.setBackGroundImageScale9Enabled(true);
-            listView.setSize(cc.size(240, 130));
+            listView.setContentSize(cc.size(240, 130));
             listView.x = (widgetSize.width - backgroundSize.width) / 2 + (backgroundSize.width - listView.width) / 2;
             listView.y = (widgetSize.height - backgroundSize.height) / 2 + (backgroundSize.height - listView.height) / 2;
             listView.addEventListenerListView(this.selectedItemEvent, this);
@@ -176,7 +176,7 @@ var UIListViewTest_Horizontal = UIScene.extend({
             listView.setBounceEnabled(true);
             listView.setBackGroundImage("res/cocosui/green_edit.png");
             listView.setBackGroundImageScale9Enabled(true);
-            listView.setSize(cc.size(240, 130));
+            listView.setContentSize(cc.size(240, 130));
             listView.x = (widgetSize.width - backgroundSize.width) / 2 + (backgroundSize.width - listView.width) / 2;
             listView.y = (widgetSize.height - backgroundSize.height) / 2 + (backgroundSize.height - listView.height) / 2;
             listView.addEventListenerListView(this.selectedItemEvent, this);

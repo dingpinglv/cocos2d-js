@@ -24,7 +24,7 @@
 // cocos2d constants
 //
 
-cc.ENGINE_VERSION = "Cocos2d-JS v3.0 rc";
+cc.ENGINE_VERSION = "Cocos2d-JS v3.0 rc0";
 
 cc.TARGET_PLATFORM = {
     WINDOWS:0,
@@ -1403,6 +1403,19 @@ cc.base = function(me, opt_methodName, var_args) {
 };
 
 
+var ClassManager = {
+    id : (0|(Math.random()*998)),
+
+    instanceId : (0|(Math.random()*998)),
+
+    getNewID : function(){
+        return this.id++;
+    },
+
+    getNewInstanceId : function(){
+        return this.instanceId++;
+    }
+};
 //
 // 2) Using "extend" subclassing
 // Simple JavaScript Inheritance By John Resig http://ejohn.org/
@@ -1455,6 +1468,13 @@ cc.Class.extend = function (prop) {
             }
         }
     }
+
+    var classId = ClassManager.getNewID();
+    ClassManager[classId] = _super;
+    var desc = { writable: true, enumerable: false, configurable: true };
+    Class.id = classId;
+    desc.value = classId;
+    Object.defineProperty(prototype, '__pid', desc);
 
     // Populate our constructed prototype object
     Class.prototype = prototype;
@@ -1654,7 +1674,10 @@ cc.EventListener.create = function(argObj){
     }
 
     for(var key in argObj) {
-        listener[key] = argObj[key];
+        // Temporary fix for EventMouse to support getDelta functions (doesn't exist in Cocos2d-x)
+        if (key == "onMouseDown" || key == "onMouseMove")
+            listener["_" + key] = argObj[key];
+        else listener[key] = argObj[key];
     }
 
     return listener;
@@ -1683,7 +1706,7 @@ cc.eventManager.dispatchCustomEvent = function (eventName, optionalUserData) {
     var ev = new cc.EventCustom(eventName);
     ev.setUserData(optionalUserData);
     this.dispatchEvent(ev);
-}
+};
 
 cc.EventCustom.prototype.setUserData = function(userData) {
     this._userData = userData;
@@ -1725,8 +1748,62 @@ cc.EventListenerKeyboard.prototype.clone = function() {
     return ret;
 };
 
+cc.EventListenerMouse.prototype.clone = function() {
+    var ret = cc.EventListenerMouse.create();
+    ret._onMouseDown = this._onMouseDown;
+    ret._onMouseMove = this._onMouseMove;
+    ret.onMouseUp = this.onMouseUp;
+    ret.onMouseScroll = this.onMouseScroll;
+    return ret;
+};
+cc.EventListenerMouse.prototype.onMouseMove = function(event) {
+    if (!this._onMouseMove)
+        return;
+    event._listener = this;
+    this._onMouseMove(event);
+    this._previousX = event.getLocationX();
+    this._previousY = event.getLocationY();
+};
+cc.EventListenerMouse.prototype.onMouseDown = function(event) {
+    if (!this._onMouseDown)
+        return;
+    event._listener = this;
+    this._previousX = event.getLocationX();
+    this._previousY = event.getLocationY();
+    this._onMouseDown(event);
+};
+
 cc.EventMouse.prototype.getLocation = function(){
     return { x: this.getLocationX(), y: this.getLocationY() };
+};
+
+cc.EventMouse.prototype.getLocationInView = function() {
+    return {x: this.getLocationX(), y: cc.view.getDesignResolutionSize().height - this.getLocationY()};
+};
+
+// Temporary fix for EventMouse to support getDelta functions (doesn't exist in Cocos2d-x)
+cc.EventMouse.prototype.getDelta = function(){
+    if (isNaN(this._listener._previousX)) {
+        this._listener._previousX = this.getLocationX();
+        this._listener._previousY = this.getLocationY();
+    }
+    return { x: this.getLocationX() - this._listener._previousX, y: this.getLocationY() - this._listener._previousY };
+};
+
+cc.EventMouse.prototype.getDeltaX = function(){
+    if (isNaN(this._listener._previousX)) {
+        this._listener._previousX = this.getLocationX();
+        this._listener._previousY = this.getLocationY();
+    }
+    return this.getLocationX() - this._listener._previousX;
+};
+
+cc.EventMouse.prototype.getDeltaY = function(){
+    if (isNaN(this._listener._previousX)) {
+        this._listener._previousX = this.getLocationX();
+        this._listener._previousY = this.getLocationY();
+    }
+    return this.getLocationY() - this._listener._previousY;
 };
 
 cc.Touch.prototype.getLocationX = function(){
@@ -2122,7 +2199,6 @@ var templateSetBlendFunc = function(src, dst) {
         blendf = {src: src, dst: dst};
     this._setBlendFunc(blendf);
     var b = this.getBlendFunc();
-    cc.log((b.src == src) + ", " + (b.dst == dst));
 };
 for (var i = 0, l = protoHasBlend.length; i < l; i++) {
     var proto = protoHasBlend[i];
@@ -2153,7 +2229,24 @@ var easeActions = {
     easeBounceInOut : 14,
     easeBackIn : 15,
     easeBackOut : 16,
-    easeBackInOut : 17
+    easeBackInOut : 17,
+
+    easeBezierAction : 18,
+    easeQuadraticActionIn : 19,
+    easeQuadraticActionOut : 20,
+    easeQuadraticActionInOut : 21,
+    easeQuarticActionIn : 22,
+    easeQuarticActionOut : 23,
+    easeQuarticActionInOut : 24,
+    easeQuinticActionIn : 25,
+    easeQuinticActionOut : 26,
+    easeQuinticActionInOut : 27,
+    easeCircleActionIn : 28,
+    easeCircleActionOut : 29,
+    easeCircleActionInOut : 30,
+    easeCubicActionIn : 31,
+    easeCubicActionOut : 32,
+    easeCubicActionInOut : 33
 };
 
 function templateEaseActions(actionTag) {
@@ -2448,6 +2541,18 @@ cc.AffineTransformInvert = function (t) {
     var determinant = 1 / (t.a * t.d - t.b * t.c);
     return {a: determinant * t.d, b: -determinant * t.b, c: -determinant * t.c, d: determinant * t.a,
         tx: determinant * (t.c * t.ty - t.d * t.tx), ty: determinant * (t.b * t.tx - t.a * t.ty)};
+};
+
+
+//
+// Node API
+//
+
+cc.Node.prototype.setUserData = function (data) {
+    this.userData = data;
+};
+cc.Node.prototype.getUserData = function () {
+    return this.userData;
 };
 
 /** returns a "world" axis aligned bounding box of the node. <br/>

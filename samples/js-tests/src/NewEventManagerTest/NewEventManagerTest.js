@@ -211,8 +211,10 @@ var TouchableSprite = cc.Sprite.extend({
             },
             onTouchEnded: function (touch, event) {
                 selfPointer.setColor(cc.color.WHITE);
-                if(selfPointer._removeListenerOnTouchEnded)
+                if(selfPointer._removeListenerOnTouchEnded) {
                     cc.eventManager.removeListener(selfPointer._listener);
+                    selfPointer._listener = null;
+                }
             }
         });
 
@@ -224,7 +226,7 @@ var TouchableSprite = cc.Sprite.extend({
     },
 
     onExit: function(){
-        cc.eventManager.removeListener(this._listener);
+        this._listener && cc.eventManager.removeListener(this._listener);
         this._super();
     },
 
@@ -1213,8 +1215,8 @@ var nextDispatcherTest = function () {
     eventDispatcherSceneIdx++;
     eventDispatcherSceneIdx = eventDispatcherSceneIdx % arrayOfEventDispatcherTest.length;
 
-    if(window.sidebar){
-        eventDispatcherSceneIdx = window.sidebar.changeTest(eventDispatcherSceneIdx, 11);
+    if(window.sideIndexBar){
+        eventDispatcherSceneIdx = window.sideIndexBar.changeTest(eventDispatcherSceneIdx, 11);
     }
 
     return new arrayOfEventDispatcherTest[eventDispatcherSceneIdx]();
@@ -1224,8 +1226,8 @@ var previousDispatcherTest = function () {
     if (eventDispatcherSceneIdx < 0)
         eventDispatcherSceneIdx += arrayOfEventDispatcherTest.length;
 
-    if(window.sidebar){
-        eventDispatcherSceneIdx = window.sidebar.changeTest(eventDispatcherSceneIdx, 11);
+    if(window.sideIndexBar){
+        eventDispatcherSceneIdx = window.sideIndexBar.changeTest(eventDispatcherSceneIdx, 11);
     }
 
     return new arrayOfEventDispatcherTest[eventDispatcherSceneIdx]();

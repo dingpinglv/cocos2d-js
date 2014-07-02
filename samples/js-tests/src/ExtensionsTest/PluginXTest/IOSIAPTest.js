@@ -22,32 +22,6 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-/****************************************************************************
- Copyright (c) 2010-2012 cocos2d-x.org
- Copyright (c) 2008-2010 Ricardo Quesada
- Copyright (c) 2011      Zynga Inc.
-
- http://www.cocos2d-x.org
-
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- ****************************************************************************/
-
 TAG_SETSERVERMODE = 0;
 TAG_GETPRODUCTLIST = 1;
 TAG_PAYMENT = 2;
@@ -67,15 +41,10 @@ var s_IAPResultItem = [
     {name: "[ ]", tag: TAG_GETPRODUCTLIST_RESULT},
     {name: "didn't call payFunction yet", tag: TAG_PAYMENT_RESULT}
 ];
-var IAPTestLayer = cc.Layer.extend({
+var IAPTestLayer = PluginXTest.extend({
     _serverMode: false,
-    ctor: function () {
-        this._super();
-        cc.associateWithNative(this, cc.Layer);
-    },
     onEnter: function () {
         this._super();
-        this.addCloseBtn();
         this.initPlugin();
         this.addMenuItem();
         this.initToast();
@@ -83,7 +52,7 @@ var IAPTestLayer = cc.Layer.extend({
     initPlugin: function () {
         var pluginManager = plugin.PluginManager.getInstance();
         this.PluginIAP = pluginManager.loadPlugin("IOSIAP");
-        this.PluginIAP.setResultListener(this);
+        this.PluginIAP.setListener(this);
     },
     addMenuItem: function () {
         var payMenu = cc.Menu.create();
@@ -107,19 +76,6 @@ var IAPTestLayer = cc.Layer.extend({
         payMenu.y = 0;
         this.addChild(payMenu);
     },
-    addCloseBtn: function () {
-        var pCloseItem = cc.MenuItemImage.create(
-            "CloseNormal.png",
-            "CloseSelected.png",
-            this.closeFunction,
-            this);
-        pCloseItem.setPosition(cc.p(cc.winSize.width - 20, 20));
-
-        // create menu, it's an autorelease object
-        var pMenu = cc.Menu.create(pCloseItem);
-        pMenu.setPosition(cc.p(0, 0));
-        this.addChild(pMenu, 1);
-    },
     closeFunction: function (sender) {
         var scene = new ExtensionsTestScene();
         scene.runThisTest();
@@ -135,13 +91,36 @@ var IAPTestLayer = cc.Layer.extend({
         this.toastLayer.retain();
         this.toastLayer.setColor(cc.color(100, 100, 100, 100));
     },
+    addTouch: function (bool) {
+        if (bool) {
+            var self = this.toastLayer;
+            this.listener = cc.EventListener.create({
+                event: cc.EventListener.TOUCH_ONE_BY_ONE,
+                swallowTouches: true,
+                onTouchBegan: function (touch, event) {
+                    return true;
+                },
+                onTouchMoved: function (touch, event) {
+                },
+                onTouchEnded: function (touch, event) {
+                },
+                onTouchCancelled: function (touch, event) {
+                }
+            });
+            cc.eventManager.addListener(this.listener, self);
+        } else {
+            cc.eventManager.removeListener(this.listener);
+        }
+    },
     toggleToast: function (show) {
         if (show) {
             if (!this.getChildByTag(TAG_TOAST)) {
                 this.addChild(this.toastLayer);
+                this.addTouch(true);
             }
         } else {
             this.toastLayer.removeFromParent(true);
+            this.addTouch(false);
         }
     },
     menuCallBack: function (sender) {
@@ -215,8 +194,9 @@ var IAPTestLayer = cc.Layer.extend({
     postServerData: function (data) {
         var that = this;
         var xhr = cc.loader.getXMLHttpRequest();
+
         //replace to your own server address
-        xhr.open("POST", "http://192.168.52.22:8888/start");
+        xhr.open("POST", "http://localhost/");
         that.toggleToast(true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
@@ -232,18 +212,5 @@ var IAPTestLayer = cc.Layer.extend({
     onExit: function () {
         this._super();
         this.toastLayer.release();
-    }
-});
-
-var IOSIAPTest = cc.Scene.extend({
-    ctor: function () {
-        this._super();
-        cc.associateWithNative(this, cc.Scene);
-    },
-
-    onEnter: function () {
-        this._super();
-        var layer = new IAPTestLayer();
-        this.addChild(layer);
     }
 });

@@ -103,7 +103,7 @@ var LayerTest1 = LayerTest.extend({
             cc.eventManager.addListener({
                 event: cc.EventListener.MOUSE,
                 onMouseMove: function(event){
-                    if(event.getButton() != undefined)
+                    if(event.getButton() == cc.EventMouse.BUTTON_LEFT)
                         event.getCurrentTarget().updateSize(event.getLocation());
                 }
             }, this);
@@ -470,7 +470,7 @@ var LayerGradient = LayerTest.extend({
                     event.getCurrentTarget().updateGradient(event.getLocation());
                 },
                 onMouseMove: function(event){
-                    if(event.getButton() != undefined)
+                    if(event.getButton() == cc.EventMouse.BUTTON_LEFT)
                         event.getCurrentTarget().updateGradient(event.getLocation());
                 }
             }, this);
@@ -557,8 +557,8 @@ var nextLayerTest = function () {
     layerTestSceneIdx++;
     layerTestSceneIdx = layerTestSceneIdx % arrayOfLayerTest.length;
 
-    if(window.sidebar){
-        layerTestSceneIdx = window.sidebar.changeTest(layerTestSceneIdx, 20);
+    if(window.sideIndexBar){
+        layerTestSceneIdx = window.sideIndexBar.changeTest(layerTestSceneIdx, 20);
     }
 
     return new arrayOfLayerTest[layerTestSceneIdx]();
@@ -568,8 +568,8 @@ var previousLayerTest = function () {
     if (layerTestSceneIdx < 0)
         layerTestSceneIdx += arrayOfLayerTest.length;
 
-    if(window.sidebar){
-        layerTestSceneIdx = window.sidebar.changeTest(layerTestSceneIdx, 20);
+    if(window.sideIndexBar){
+        layerTestSceneIdx = window.sideIndexBar.changeTest(layerTestSceneIdx, 20);
     }
 
     return new arrayOfLayerTest[layerTestSceneIdx]();

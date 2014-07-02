@@ -361,8 +361,8 @@ var MouseTest = EventTest.extend({
                     var pos = event.getLocation(), target = event.getCurrentTarget();
                     if(event.getButton() === cc.EventMouse.BUTTON_RIGHT)
                         cc.log("onRightMouseDown at: " + pos.x + " " + pos.y );
-                    else
-                        cc.log("onMouseDown at: " + pos.x + " " + pos.y );
+                    else if(event.getButton() === cc.EventMouse.BUTTON_LEFT)
+                        cc.log("onLeftMouseDown at: " + pos.x + " " + pos.y );
                     target.sprite.x = pos.x;
                     target.sprite.y = pos.y;
                 },
@@ -450,8 +450,8 @@ var nextEventsTest = function () {
     sceneIdx++;
     sceneIdx = sceneIdx % arrayOfEventsTest.length;
 
-    if(window.sidebar){
-        sceneIdx = window.sidebar.changeTest(sceneIdx, 12);
+    if(window.sideIndexBar){
+        sceneIdx = window.sideIndexBar.changeTest(sceneIdx, 12);
     }
 
     return new arrayOfEventsTest[sceneIdx]();
@@ -461,8 +461,8 @@ var previousEventsTest = function () {
     if (sceneIdx < 0)
         sceneIdx += arrayOfEventsTest.length;
 
-    if(window.sidebar){
-        sceneIdx = window.sidebar.changeTest(sceneIdx, 12);
+    if(window.sideIndexBar){
+        sceneIdx = window.sideIndexBar.changeTest(sceneIdx, 12);
     }
 
     return new arrayOfEventsTest[sceneIdx]();
